@@ -61,6 +61,12 @@ app.put("/pessoas", (request, response) => {
     return response.send({ id, nome, telefone, status });
 });
 
+app.delete("/pessoas/:id",(request,response)=>{
+    const { id } = request.params;
+    console.log(id);
+    return response.send({status: "ok"});
+});
+
 
 app.listen(8080, () => {
     console.log("o server esta rodando na porta 8080");
