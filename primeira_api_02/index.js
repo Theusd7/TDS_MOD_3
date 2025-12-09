@@ -9,12 +9,11 @@ let carros = [{ id: 1, cor: "branco", modelo: "celta", ano: 2008 }];
 var seq = 1;
 
 app.get("/carros", (resquest, response) => {
-
     response.status(200).send(carros)
 });
 
 app.post("/carros", (request, response) => {
-
+//
     const { cor, modelo, ano } = request.body;
 
     seq++;
@@ -44,3 +43,4 @@ app.listen(8080, () => {
 app.get("/alunos", (request, response) => {
     response.status(200).send("pf");
 });
+

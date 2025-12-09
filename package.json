@@ -1,0 +1,20 @@
+{
+  "name": "tds_mod_3",
+  "version": "1.0.0",
+  "description": "Tecnico de desenvolvimento de sistemas MOD_3, Diciplina de desenvolvimento de Sistemas 2025/2026",
+  "homepage": "https://github.com/Theusd7/TDS_MOD_3#readme",
+  "bugs": {
+    "url": "https://github.com/Theusd7/TDS_MOD_3/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Theusd7/TDS_MOD_3.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
