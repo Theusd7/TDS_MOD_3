@@ -1,67 +1,50 @@
 const express = require("express");
 const knex = require("knex");
-const app = express();
 
-app.use(express.json());
-
-const conexao = knex({
-    client: "mysql",
+const db = knex({
+    client: "mysql2",
     connection: {
-        host: "127.0.0.1",
+        host: "localhost",
         port: 3306,
         user: "root",
         password: "",
         database: "ESCOLA"
     }
 });
-app.post("/cadastro", async (req, res) => {
-    const { id, nome, ra } = req.body;
 
-    try {
+const app = express();
 
-        await conexao.insert({ nome, ra }).into("alunos")
+app.use(express.json());
 
-        res.send("aluno cadastrado com sucesso");
-    } catch (error) {
-        res.send("falha ao cadastrar aluno");
+app.get("/buscar", async (request, response) => {
+
+    const data = await db("ALUNOS").select();
+
+    response.send(data);
+});
+
+app.post("/cadastrar", async (request, response) => {
+    const { nome, ra } = request.body;
+
+    const data = await db("ALUNOS").insert({ nome, ra });
+
+    if (data.length > 0) {
+        response.send({ msg: "Aluno cadastrado com sucesso!" });
+    } else {
+        response.send({ msg: "Erro ao cadastrar um novo aluno!" });
     }
 
-
 });
 
-app.get("/listar", async (req, res) => {
-    await conexao.select().table("alunos")
-        .then((data) => {
-
-
-            res.send(data)
-        }).catch((error) => {
-
-            console.log(error)
-        })
-
+app.put("/atualizar", (request, response) => {
+    response.send("Atualizar")
 });
 
-app.put("/atualizar/:id", async (request, response) => {
-    
-    try{
-        const { id } = request.params;
-        const{ nome, ra, status } = request.body    
-        
-        response.send({id, nome, ra, status});
-
-    } catch(error){
-        request.send("falha na atualização")
-    }
-    
-   
+app.delete("/deletar", (request, response) => {
+    response.send("deletar!")
 });
-
-app.delete("/delete:id", (res, req) => {
-
-})
 
 
 app.listen(8080, () => {
-    console.log("ta rodando")
-}); 
+    console.log("O servidor está rodando na porta 8080");
+});
