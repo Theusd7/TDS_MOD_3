@@ -42,14 +42,11 @@ app.get("/listar", async (req, res) => {
 
 });
 
-app.put("/atualizar", async (req, res) => {
+app.put("/atualizar/:id",(req, res) => {
     const { id, nome, ra } = req.body;
-
-    await conexao("ALUNOS").update({ nome, ra }).where({ id });
+    const { id } = req.params;
 
     res.send({ id, nome, ra });
-
-
 });
 
 
