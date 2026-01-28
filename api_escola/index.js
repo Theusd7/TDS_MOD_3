@@ -15,7 +15,7 @@ const conexao = knex({
     }
 });
 app.post("/cadastro", async (req, res) => {
-    const { nome, ra } = req.body;
+    const { id, nome, ra } = req.body;
 
     try {
 
@@ -42,13 +42,20 @@ app.get("/listar", async (req, res) => {
 
 });
 
-app.put("/atualizar/:id",(req, res) => {
-    const { id, nome, ra } = req.body;
-    const { id } = req.params;
+app.put("/atualizar/:id", async (request, response) => {
+    
+    try{
+        const { id } = request.params;
+        const{ nome, ra, status } = request.body    
+        
+        response.send({id, nome, ra, status});
 
-    res.send({ id, nome, ra });
+    } catch(error){
+        request.send("falha na atualização")
+    }
+    
+   
 });
-
 
 app.delete("/delete:id", (res, req) => {
 

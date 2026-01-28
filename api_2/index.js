@@ -4,7 +4,7 @@ const app = express();
 
 
 app.listen(8000, () => {
-    console.log("oooooo potencia")
+    console.log("ta rodando")
 });
 
 app.get("/buscar", (resquest, response) => {
