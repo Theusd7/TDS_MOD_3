@@ -36,12 +36,30 @@ app.post("/cadastrar", async (request, response) => {
 
 });
 
-app.put("/atualizar", (request, response) => {
-    response.send("Atualizar")
+app.put("/atualizar", (request, response) => { 
+    const { id } = request.params;
+    const { nome, ra, status } = request.body
+
+    const data = await db("alunos").update({ nome, ra, status}).where({ id});
+    if data == 1 {
+        response.send({ msg : "aluno atualizado"});
+    } else {
+        response.send({ msg : "erro"});
+    }
+
+
 });
 
 app.delete("/deletar", (request, response) => {
-    response.send("deletar!")
+    const { id } = request.params;
+   const data = db("ALUNOS").where({ id}).del();
+
+   if (data == 1) {
+    response.send({ msg : "aluno deletado com sucesso!"});
+   } else {
+    response.send({ msg : "erro ao deletar aluno!"});
+   }
+   response.send({ msg : "aluno deletado"});
 });
 
 
