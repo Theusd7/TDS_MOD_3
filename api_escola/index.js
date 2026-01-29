@@ -7,7 +7,7 @@ const db = knex({
         host: "localhost",
         port: 3306,
         user: "root",
-        password: "",
+        password: "admin",
         database: "ESCOLA"
     }
 });
@@ -40,8 +40,8 @@ app.put("/atualizar", (request, response) => {
     const { id } = request.params;
     const { nome, ra, status } = request.body
 
-    const data = await db("alunos").update({ nome, ra, status}).where({ id});
-    if data == 1 {
+    const data = db("alunos").update({ nome, ra, status}).where({ id});
+    if(data == 1 ) {
         response.send({ msg : "aluno atualizado"});
     } else {
         response.send({ msg : "erro"});
